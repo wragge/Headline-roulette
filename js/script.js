@@ -143,7 +143,7 @@ $(function(){
         } else if (difference > -10 && difference <= -1) {
             message = messages['lt1'];
         }
-        $("#status").text(message).removeClass('alert-success').addClass('alert-error');
+        $("#status").removeClass('alert-success').addClass('alert-error').text(message);
 
     }
     function fail() {
@@ -160,7 +160,7 @@ $(function(){
         $("#summary").empty();
         $("#paper").empty();
         $("#pub_details").hide();
-        $("#status").text('Can you guess when this article was published?').removeClass("alert-error").addClass("alert-success");
+        $("#status").removeClass("alert-error").addClass("alert-success").text('Can you guess when this article was published?');
         get_random_article();
     }
     $('#year').keydown(function(event) {
