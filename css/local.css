@@ -1,0 +1,29 @@
+#article { min-height: 200px;}
+#headline { font-weight: bold;}
+#paper { font-style: italic;}
+#count {
+    text-align:center;
+    -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+      }
+#count p {margin: 0;}
+#guesses {font-size: 400%; line-height: 100%;}
+#text-guesses {
+                font-size: 120%;
+                font-weight: normal;
+                width: 100%;
+                color: #ffffff;
+                padding: 10px 0 10px 0;
+            }
+.label {padding: 10px;}
+#year { font-size: 200%; padding: 20px;}
+.status-ok { background: #468847;}
+.status-warning { background: #F89406;}
+.status-danger { background: #B94A48; }
+.border-ok { border: 1px solid #468847;}
+.border-warning {  border: 1px solid #F89406; }
+.border-danger { border: 1px solid #B94A48; }
+.border-top { border-top: 1px solid #999; padding-top: 10px;}
+footer { margin-top: 20px;}
+footer p {margin: 0;}

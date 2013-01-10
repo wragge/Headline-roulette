@@ -20,7 +20,7 @@ $(function(){
     messages['lt50'] = "Nope, missed the mark there. It's a lot later.";
     messages['lt10'] = "Not bad, but it's still quite a bit later."
     messages['lt1'] = "So close! Try a bit later.";
-    
+
     success_messages = [];
     success_messages[1] = 'What! How did you... are you cheating?';
     success_messages[2] = 'The force is strong with this one...';
@@ -32,9 +32,9 @@ $(function(){
     success_messages[8] = 'You had us worried, but you got there in the end.';
     success_messages[9] = 'Living dangerously huh? You only just made it.';
     success_messages[10] = 'Eeek! A last gasp victory!';
-    
+
     function get_random_article() {
-        $("#headline").text('Loading...');
+        $("#headline").text('Choosing a random article...');
         $("#article").showLoading();
         current_year = get_random_year();
         var query = trove_api_url + "&q=date:[" + year + " TO " + year + "]&n=0&l-category=Article&encoding=json&key=" + trove_api_key;
@@ -59,7 +59,7 @@ $(function(){
             var query = trove_api_url + "&q=date:[" + current_year + " TO " + current_year + "]&s=" + number + "&n=1&l-category=Article&encoding=json&key=" + trove_api_key;
             get_api_result(query, 'article');
         } else if (type == 'article') {
-            var article = results.response.zone[0].records.article[0]
+            var article = results.response.zone[0].records.article[0];
             display_article(article);
         }
     }
@@ -71,7 +71,7 @@ $(function(){
     function display_article(article) {
         $('#headline').html(mask_year(article.heading));
         $('#summary').html(mask_year(article.snippet));
-        if (article.title.value.indexOf('(')) { 
+        if (article.title.value.indexOf('(')) {
             newspaper = article.title.value.substr(0, article.title.value.indexOf('(') - 1);
         } else {
             newspaper = article.title.value;
@@ -81,9 +81,10 @@ $(function(){
         date = $.format.date(article.date + ' 00:00:00.000', 'd MMMM yyyy');
         year = article.date.substr(0,4);
         $('#date').text(date);
-        $('#article-link').html('<a href="' + article.troveUrl + '">Read article</a>');
+        $('#article-link').html('<a class="btn btn-mini btn-primary" href="' + article.troveUrl + '">Read article</a>');
         $('#year').data('year', year);
         $("#article").hideLoading();
+        $("#year").focus();
     }
     function mask_year(text) {
         text = text.replace(year, '****');
@@ -99,14 +100,26 @@ $(function(){
                 give_message(guess, guesses);
                 $("#guesses").data("guesses", guesses);
                 $("#guesses").text(10 - guesses);
+                if (guesses == 4) {
+                    $("#text-guesses").removeClass('status-ok').addClass('status-warning');
+                    $("#count").removeClass('border-ok').addClass('border-warning');
+                } else if (guesses == 7) {
+                    $("#text-guesses").removeClass('status-warning').addClass('status-danger');
+                    $("#count").removeClass('border-warning').addClass('border-danger');
+                }
+                if (guesses == 9) {
+                    $("#text-guesses").text('guess left');
+                }
+                $("#year").focus();
             } else {
+                $("#text-guesses").text('guesses left');
                 fail();
             }
-            
+
         }
     }
     function correct(guesses) {
-        $("#status").html("<b>That's it!</b><br>" + success_messages[guesses]);
+        $("#status").html("<b>That's it!</b><br>" + success_messages[guesses]).removeClass("alert-error").addClass("alert-success");
         $("#pub_details").show();
     }
     function give_message(guess, guesses) {
@@ -116,22 +129,22 @@ $(function(){
         if (difference >= 100) {
             message = messages['gt100'];
         } else if (difference < 100 && difference >= 50) {
-            message = messages['gt50']; 
+            message = messages['gt50'];
         } else if (difference < 50 && difference >= 10) {
-            message = messages['gt10']; 
+            message = messages['gt10'];
         } else if (difference < 10 && difference >= 1) {
-            message = messages['gt1']; 
+            message = messages['gt1'];
         } else if (difference <= -100) {
             message = messages['lt100'];
         } else if (difference > -100 && difference <= -50) {
-            message = messages['lt50']; 
+            message = messages['lt50'];
         } else if (difference > -50 && difference <= -10) {
-            message = messages['lt10']; 
+            message = messages['lt10'];
         } else if (difference > -10 && difference <= -1) {
-            message = messages['lt1']; 
+            message = messages['lt1'];
         }
-        $("#status").text(message);
-        
+        $("#status").text(message).removeClass('alert-success').addClass('alert-error');
+
     }
     function fail() {
         $("#guesses").text(0);
@@ -139,14 +152,15 @@ $(function(){
         $("#pub_details").show();
     }
     function reset() {
-        
-        $("#headline").text('Loading...');
+        $("#year").val("");
+        $("#headline").text('Choosing a random article...');
         $("#guesses").data("guesses", 0).text(10);
+        $("#text-guesses").removeClass('status-warning status-danger').addClass('status-ok');
+        $("#count").removeClass('border-warning border-danger').addClass('border-ok');
         $("#summary").empty();
         $("#paper").empty();
         $("#pub_details").hide();
-        $("#status").text('Can you guess when this article was published?');
-        $("#year").val('YEAR').css('color', '#D9D9D9');
+        $("#status").text('Can you guess when this article was published?').removeClass("alert-error").addClass("alert-success");
         get_random_article();
     }
     $('#year').keydown(function(event) {
@@ -155,7 +169,6 @@ $(function(){
             guess();
         }
     });
-    $("#year").focus(function() { if ($(this).val() == "YEAR") { $(this).val('').css('color', '#222222');} })
     $("#guess-button").button().click(function() { guess(); });
     $("#reload-button").button().click(function() { reset(); });
     $("#guesses").data("guesses", 0);
