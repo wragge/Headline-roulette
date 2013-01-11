@@ -14,11 +14,11 @@ $(function(){
     var messages = {};
     messages['gt100'] = "Ummm... really... that's your guess? It's much much earlier!";
     messages['gt50'] = "Oh no! You're way off. It's a lot earlier.";
-    messages['gt10'] = "Getting close, but it's still quite a bit earlier."
+    messages['gt10'] = "Getting close, but it's still quite a bit earlier.";
     messages['gt1'] = "Almost! Try a bit earlier.";
     messages['lt100'] = "Come on, get serious! It's much much later.";
     messages['lt50'] = "Nope, missed the mark there. It's a lot later.";
-    messages['lt10'] = "Not bad, but it's still quite a bit later."
+    messages['lt10'] = "Not bad, but it's still quite a bit later.";
     messages['lt1'] = "So close! Try a bit later.";
 
     success_messages = [];
@@ -65,7 +65,7 @@ $(function(){
     }
     function get_random_year() {
         var range = (end_year - start_year) + 1;
-        year = start_year + Math.floor(Math.random() * range);
+        var year = start_year + Math.floor(Math.random() * range);
         return year;
     }
     function display_article(article) {
@@ -78,8 +78,8 @@ $(function(){
         }
         $('#paper').html(newspaper);
         $('#summary, #paper, #count').show();
-        date = $.format.date(article.date + ' 00:00:00.000', 'd MMMM yyyy');
-        year = article.date.substr(0,4);
+        var date = $.format.date(article.date + ' 00:00:00.000', 'd MMMM yyyy');
+        var year = article.date.substr(0,4);
         $('#date').text(date);
         $('#article-link').html('<a class="btn btn-mini btn-primary" href="' + article.troveUrl + '">Read article</a>');
         $('#year').data('year', year);
