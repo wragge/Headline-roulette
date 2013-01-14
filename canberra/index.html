@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Headline Roulette -- The Canberra Edition</title>
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="../js/showLoading/css/showLoading.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+    <style>
+      .edition { font-weight: normal;}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+          <div class="span8 offset1">
+
+            <h1>Headline roulette</h1>
+            <p class="muted lead">How well do you know the history of Canberra?</p>
+          </div>
+          <div class="span2">
+            <h5 class="edition">THE CANBERRA EDITION</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span4 offset1">
+            <div id="article" class="well well-small">
+              <p id='headline'></p>
+              <p id='summary'></p>
+              <p id='paper'></p>
+              <div id='pub_details'>
+                <p id="date"></p>
+                <div id='article-link'></div>
+              </div>
+            </div>
+          </div>
+
+          <div id='guess' class="span4">
+            <p class='note alert alert-block alert-success' id='status'>
+              Can you guess when this newspaper article was published?
+            </p>
+            <p>
+              <input placeholder="YEAR" id='year' type="text" maxlength="4" class="input-small">
+            </p>
+            <p class='button'>
+              <button id='guess-button' class="btn btn-primary btn-large">Guess</button>
+              <button id='reload-button' class="btn btn-large">Reload</button>
+            </p>
+          </div>
+          <div id='count' class="span2 border-ok">
+              <p id='guesses'>10</p>
+              <p id='text-guesses' class="status-ok">guesses left</p>
+            </p>
+          </div>
+
+        </div>
+
+        <footer>
+          <div class="row">
+            <div class="span10 offset1 border-top">
+              <a class="pull-right" href="http://trove.nla.gov.au/general/api"><img src="../img/API-light.png"></a>
+              <p class="muted"><small>
+                The original <a href="http://wraggelabs.com/shed/headline-roulette/">Headline Roulette</a>
+              </small></p>
+              <p class="muted"><small>
+                Created by <a href="http://discontents.com.au/about-me">Tim Sherratt</a>.
+                Another <a href="http://wraggelabs.com">WraggeLabs</a> experiment...
+              </small></p>
+              <p class="muted"><small>
+                <a href="http://bootswatch.com/readable/">Readable</a> theme for Bootstrap provided by <a href="http://bootswatch.com/">Bootswatch</a>.
+              </small></p>
+            </div>
+          </div>
+        </footer>
+    </div>
+    <script src="../js/jquery-1.7.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/plugins.js"></script>
+    <script type="text/javascript" src="../js/showLoading/js/jquery.showLoading.min.js"></script>
+    <script src="script.js"></script>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-12509340-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>
