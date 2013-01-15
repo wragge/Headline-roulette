@@ -38,7 +38,7 @@ $(function(){
         $("#headline").text('Choosing a random article...');
         $("#article").showLoading();
         current_year = get_random_year();
-        var query = trove_api_url + "&q=date:[" + year + " TO " + year + "]&n=0&l-category=Article&encoding=json&key=" + trove_api_key + nsw_titles;
+        var query = trove_api_url + "&q=date:[" + current_year + " TO " + current_year + "]&n=0&l-category=Article&encoding=json&key=" + trove_api_key + nsw_titles;
         get_api_result(query, 'total');
     }
     function get_api_result(query, type) {
